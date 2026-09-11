@@ -1,0 +1,2 @@
+25253b6715e453f381b2798c75343a364eab9cd8e26e5cbd917e9363242352b1  Sentinel-app-source-v1.3.6.zip
+f7d2ab4d4cb5c681d43beac19625b15e18275ca5fd09c3d8c10f9a94401bceb2  Sentinel-v1.3.6-debug.apk

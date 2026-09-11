@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_card"
+    android:padding="16dp">
+    <View
+        android:id="@+id/sevDot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/dot_circle" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="14dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/riskTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_body"
+                android:textColor="@color/ink" />
+            <TextView
+                android:id="@+id/sevChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingHorizontal="9dp"
+                android:paddingVertical="3dp"
+                android:textSize="10.5sp"
+                android:letterSpacing="0.06"
+                android:textAllCaps="true" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/riskDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/text_small"
+            android:lineSpacingExtra="2.5dp"
+            android:textColor="@color/ink_secondary" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/canvas">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/appHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/pad_screen"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <FrameLayout
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_logo">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shield"
+                android:contentDescription="@null"
+                android:tint="@color/coral" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="14dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="26sp"
+                android:letterSpacing="-0.02"
+                android:textColor="@color/ink" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_tag"
+                android:textSize="12.5sp"
+                android:letterSpacing="0.04"
+                android:textAllCaps="true"
+                android:textColor="@color/ink_faint" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/modeIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tab_pill"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="AUTO"
+            android:textSize="11sp"
+            android:letterSpacing="0.06"
+            android:textColor="@color/ink_secondary" />
+    </LinearLayout>
+
+    <!-- Tab content -->
+    <FrameLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <include android:id="@+id/tabApp" layout="@layout/tab_app" />
+        <include android:id="@+id/tabWeb" layout="@layout/tab_web" />
+        <include android:id="@+id/tabSettings" layout="@layout/tab_settings" />
+    </FrameLayout>
+
+    <!-- Bottom nav -->
+    <LinearLayout
+        android:id="@+id/appBottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/surface"
+        android:elevation="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:id="@+id/navApp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp">
+            <ImageView android:id="@+id/navAppIcon"
+                android:layout_width="24dp" android:layout_height="24dp"
+                android:src="@drawable/ic_shield" android:contentDescription="@null"
+                android:tint="@color/nav_inactive" />
+            <TextView android:id="@+id/navAppText"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/nav_app"
+                android:textSize="11.5sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/nav_inactive" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navWeb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp">
+            <ImageView android:id="@+id/navWebIcon"
+                android:layout_width="24dp" android:layout_height="24dp"
+                android:src="@drawable/ic_web" android:contentDescription="@null"
+                android:tint="@color/nav_inactive" />
+            <TextView android:id="@+id/navWebText"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/nav_web"
+                android:textSize="11.5sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/nav_inactive" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp">
+            <ImageView android:id="@+id/navSettingsIcon"
+                android:layout_width="24dp" android:layout_height="24dp"
+                android:src="@drawable/ic_gear" android:contentDescription="@null"
+                android:tint="@color/nav_inactive" />
+            <TextView android:id="@+id/navSettingsText"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/nav_settings"
+                android:textSize="11.5sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/nav_inactive" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

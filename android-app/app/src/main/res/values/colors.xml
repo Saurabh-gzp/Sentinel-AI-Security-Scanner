@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Claude-inspired warm palette: LIGHT -->
+    <color name="canvas">#FAF9F5</color>
+    <color name="canvas_alt">#F1ECE1</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_alt">#F4F0E7</color>
+
+    <color name="ink">#1F1E1B</color>
+    <color name="ink_secondary">#6B6862</color>
+    <color name="ink_faint">#9A958B</color>
+
+    <color name="border">#E6E0D2</color>
+    <color name="border_strong">#D6CFBE</color>
+
+    <color name="coral">#CC785C</color>
+    <color name="coral_press">#B0623F</color>
+    <color name="coral_soft">#F2DED4</color>
+
+    <color name="danger">#B5462F</color>
+    <color name="danger_soft">#F3DCD5</color>
+    <color name="warn">#B6842B</color>
+    <color name="warn_soft">#F3E7CF</color>
+    <color name="safe">#4E7A43</color>
+    <color name="safe_soft">#DCE8D5</color>
+    <color name="info">#3C6E8F</color>
+    <color name="info_soft">#D6E3EC</color>
+
+    <color name="nav_inactive">#A8A299</color>
+    <color name="overlay">#33000000</color>
+</resources>

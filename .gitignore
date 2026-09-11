@@ -1,18 +1,7 @@
-# build artifacts
-build/
-bin/
-out/
-gen/
-*.ap_
-*.dex
-*.class
+.DS_Store
 *.iml
 .gradle/
 local.properties
-# keystore (never commit)
-*.keystore
-*.jks
-# os / editor
-.DS_Store
-.idea/
-*.swp
+android-app/.gradle/
+android-app/app/build/
+android-app/build/

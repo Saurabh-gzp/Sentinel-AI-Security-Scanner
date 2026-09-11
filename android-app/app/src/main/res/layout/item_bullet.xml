@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal"
+    android:gravity="top">
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_check"
+        android:contentDescription="@null"
+        android:tint="@color/safe" />
+    <TextView
+        android:id="@+id/bulletText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="@dimen/text_small"
+        android:lineSpacingExtra="2.5dp"
+        android:textColor="@color/ink_secondary" />
+</LinearLayout>

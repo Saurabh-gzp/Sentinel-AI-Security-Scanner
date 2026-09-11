@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appListRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/canvas">
+
+    <LinearLayout
+        android:id="@+id/appListTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/pad_screen"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
+        <ImageView
+            android:id="@+id/appListBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@null"
+            android:tint="@color/ink_secondary"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Select Installed App"
+            android:fontFamily="serif"
+            android:textSize="20sp"
+            android:textColor="@color/ink" />
+    </LinearLayout>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp" android:text="Newest installed apps first · tap any app to inspect" android:textSize="12sp" android:textColor="@color/ink_faint" />
+    <EditText
+        android:id="@+id/appSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/pad_screen"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_input"
+        android:padding="14dp"
+        android:hint="Search apps..."
+        android:textColorHint="@color/ink_faint"
+        android:textColor="@color/ink"
+        android:textSize="15sp"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <ProgressBar
+        android:id="@+id/appListProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:indeterminateTint="@color/coral" />
+
+    <ListView
+        android:id="@+id/appListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:divider="@color/border"
+        android:dividerHeight="1dp" />
+</LinearLayout>

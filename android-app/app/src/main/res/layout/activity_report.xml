@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reportRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/canvas">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:id="@+id/reportTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/pad_screen"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@null"
+            android:tint="@color/ink_secondary"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+        <TextView
+            android:id="@+id/reportTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:text="Security Report"
+            android:fontFamily="serif"
+            android:textSize="20sp"
+            android:textColor="@color/ink" />
+        <TextView
+            android:id="@+id/chatBtn" android:layout_width="48dp" android:layout_height="40dp"
+            android:gravity="center" android:text="✦" android:textSize="24sp" android:textColor="@color/coral"
+            android:contentDescription="Ask Sentinel" android:clickable="true" android:focusable="true" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/pad_screen"
+            android:paddingBottom="36dp">
+
+            <!-- Verdict banner -->
+            <LinearLayout
+                android:id="@+id/verdictBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_card"
+                android:padding="22dp">
+                <FrameLayout
+                    android:id="@+id/verdictIconWrap"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_surface">
+                    <ImageView
+                        android:id="@+id/verdictIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:contentDescription="@null"
+                        android:tint="@color/safe" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/verdictLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SAFE"
+                        android:fontFamily="serif"
+                        android:textStyle="bold"
+                        android:textSize="27sp"
+                        android:letterSpacing="-0.01"
+                        android:textColor="@color/safe" />
+                    <TextView
+                        android:id="@+id/verdictConfidence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/ink_secondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Target -->
+            <TextView
+                android:id="@+id/targetText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="monospace"
+                android:textSize="12.5sp"
+                android:textColor="@color/ink_faint" />
+
+            <!-- Summary -->
+            <include layout="@layout/report_section"
+                android:id="@+id/secSummary" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <!-- Risks -->
+            <TextView
+                style="@style/SectionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Risk findings" />
+            <LinearLayout
+                android:id="@+id/risksList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical" />
+
+            <!-- Positives -->
+            <TextView
+                style="@style/SectionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Good signs" />
+            <LinearLayout
+                android:id="@+id/positivesList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical" />
+
+            <!-- Recommendation -->
+            <include layout="@layout/report_section"
+                android:id="@+id/secAdvice" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="22dp" />
+
+            <!-- Practical advice (ToS/account-ban/privacy caveats) -->
+            <include layout="@layout/report_section"
+                android:id="@+id/secPractical" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="14dp" />
+
+            <!-- Evidence -->
+            <TextView
+                style="@style/SectionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Extracted evidence" />
+            <TextView
+                android:id="@+id/evidenceText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_surface"
+                android:padding="16dp"
+                android:fontFamily="monospace"
+                android:textSize="11.5sp"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/ink_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="✓ All temp files were deleted after this scan."
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/safe" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="@color/canvas">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/pad_screen"
+        android:paddingTop="10dp"
+        android:paddingBottom="28dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_web"
+            android:fontFamily="serif"
+            android:textSize="@dimen/text_display"
+            android:letterSpacing="-0.02"
+            android:textColor="@color/ink" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/web_subtitle"
+            android:textSize="@dimen/text_body"
+            android:textColor="@color/ink_secondary" />
+
+        <!-- URL input card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/pad_card">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WEBSITE URL"
+                android:textSize="11sp"
+                android:letterSpacing="0.08"
+                android:textColor="@color/ink_faint" />
+            <EditText
+                android:id="@+id/urlInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/url_hint"
+                android:textColorHint="@color/ink_faint"
+                android:textSize="@dimen/text_body"
+                android:textColor="@color/ink"
+                android:inputType="textUri"
+                android:imeOptions="actionGo"
+                android:singleLine="true" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/border_strong" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/webScanBtn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:text="@string/scan"
+            android:textAllCaps="true"
+            android:letterSpacing="0.08"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFFFF"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:id="@+id/webStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:indeterminateTint="@color/coral" />
+            <TextView
+                android:id="@+id/webStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textSize="@dimen/text_body"
+                android:textColor="@color/ink_secondary" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="Fetches the page, checks SSL/HTTPS, redirect chain, forms, scripts &amp; obfuscation signals — then AI judges whether it is phishing, a fake or otherwise dangerous."
+            android:textSize="@dimen/text_small"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/ink_faint" />
+    </LinearLayout>
+</ScrollView>
