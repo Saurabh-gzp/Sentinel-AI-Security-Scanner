@@ -76,5 +76,5 @@ jobs:
           prerelease: false
           files: |
             app/${{ steps.ver.outputs.tag }}/Sentinel-${{ steps.ver.outputs.tag }}-debug.apk
-            app/${{ steps.ver.outputs.tag }}/Sentinel-app-source-${{ steps.ver.outputs.ver }}.zip
+            app/${{ steps.ver.outputs.tag }}/Sentinel-app-source-v${{ steps.ver.outputs.ver }}.zip
             app/${{ steps.ver.outputs.tag }}/SHA256SUMS.txt
