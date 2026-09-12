@@ -64,3 +64,8 @@ The chat composer now observes IME window insets and translates itself above the
 ## v1.3.6 streaming latency
 
 The chat stream remains genuine Gemini SSE (chunks are rendered as they arrive, not replayed after a complete response). The request now caps output at 700 tokens to reduce time-to-complete and keeps the current scan evidence/context without triggering a rescan.
+
+## v1.3.7 stability and hardening
+
+A full code-review pass fixed six bugs (chat stop button was a no-op, split APKs misdetected as the base package, NPE on body-less error responses, `pkg.bin` cache leak, unbounded DEX memory, stale Keystore ciphertext) and removed dead code without touching scan logic or verdicts. Releases are now built by CI: tagging `v*` publishes the APK, source zip and SHA256SUMS as a GitHub Release, and the website download buttons point at the tagged release instead of a mutable branch URL. See [`ANALYSIS.md`](ANALYSIS.md) for the complete review and [`RELEASE_NOTES_v1.3.7.md`](RELEASE_NOTES_v1.3.7.md) for the changelog.
+
