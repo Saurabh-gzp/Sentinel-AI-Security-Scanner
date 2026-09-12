@@ -40,7 +40,13 @@ class Prefs {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             cipher.init(Cipher.DECRYPT_MODE, getOrCreateKey(), new GCMParameterSpec(128, iv));
             return new String(cipher.doFinal(ciphertext), StandardCharsets.UTF_8);
-        } catch (Exception e) { return ""; }
+        } catch (Exception e) {
+            // Stale or undecryptable ciphertext (e.g. Keystore key lost after a device restore).
+            // Self-heal: drop the stored blob so the user is asked for a fresh key instead of
+            // silently looping on a value that can never decrypt.
+            sp(c).edit().remove(K_KEY).putBoolean(K_VERIFIED, false).apply();
+            return "";
+        }
     }
 
     static void setKey(Context c, String key) {

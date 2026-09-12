@@ -184,7 +184,6 @@ class GeminiClient {
         }
         String t = sb.toString().trim();
         if (t.isEmpty()) {
-            JSONArray parts = cand.getJSONObject(0).optJSONArray("safetyRatings");
             throw new Exception("No text returned (finishReason: "
                     + cand.getJSONObject(0).optString("finishReason", "?") + ")");
         }

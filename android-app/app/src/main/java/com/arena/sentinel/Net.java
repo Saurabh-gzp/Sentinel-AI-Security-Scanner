@@ -93,6 +93,7 @@ class Net {
         int code = c.getResponseCode();
         if (code >= 200 && code < 300) in = c.getInputStream();
         else in = c.getErrorStream();
+        if (in == null) in = new java.io.ByteArrayInputStream(new byte[0]); // some error responses carry no body
         StringBuilder sb = new StringBuilder();
         BufferedReader r = new BufferedReader(new InputStreamReader(in, "UTF-8"));
         String line;

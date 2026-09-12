@@ -35,8 +35,9 @@ class PackageOpener {
         o.sourceName = src.getName();
         workDir.mkdirs();
         String low = src.getName().toLowerCase();
+        ZipFile zf = null;
         try {
-            ZipFile zf = new ZipFile(src);
+            zf = new ZipFile(src);
             boolean isPlainApk = zf.getEntry("AndroidManifest.xml") != null
                     && zf.getEntry("classes.dex") != null;
             if (isPlainApk) {
@@ -48,7 +49,6 @@ class PackageOpener {
                 e.base = true;
                 o.apks.add(e);
                 o.baseApk = src;
-                zf.close();
                 return o;
             }
             // container (apks / xapk / zip-of-apks)
@@ -73,12 +73,15 @@ class PackageOpener {
                     o.obb.add(b);
                 }
             }
-            zf.close();
-            // mark the base = the APK that actually contains code (classes.dex)
+            // mark the base = the APK that actually contains code (classes.dex).
+            // NOTE: split APKs also carry an AndroidManifest.xml, so the manifest alone must NOT
+            // qualify an entry as the base — otherwise a resource split picked before the real
+            // base would be scanned instead of the code-bearing APK.
             for (ApkEntry e : o.apks) {
-                if (hasCode(e.file)) { e.base = true; o.baseApk = e.file; break; }
+                if (hasDex(e.file)) { e.base = true; o.baseApk = e.file; break; }
             }
             if (o.baseApk == null && !o.apks.isEmpty()) {
+                // fallback: resource-only base (no DEX anywhere in the container)
                 o.apks.get(0).base = true;
                 o.baseApk = o.apks.get(0).file;
             }
@@ -87,29 +90,34 @@ class PackageOpener {
         } catch (Exception e) {
             o.error = "open failed: " + e.getMessage();
             return o;
+        } finally {
+            if (zf != null) try { zf.close(); } catch (Exception ignored) { }
         }
     }
 
-    private static boolean hasCode(File apk) {
-        ZipFile zf = null;
+    private static boolean hasDex(File apk) {
+        ZipFile z = null;
         try {
-            zf = new ZipFile(apk);
-            return zf.getEntry("classes.dex") != null || zf.getEntry("AndroidManifest.xml") != null;
+            z = new ZipFile(apk);
+            return z.getEntry("classes.dex") != null;
         } catch (Exception e) {
             return false;
         } finally {
-            if (zf != null) try { zf.close(); } catch (Exception ignored) { }
+            if (z != null) try { z.close(); } catch (Exception ignored) { }
         }
     }
 
     private static void copyEntry(ZipFile zf, ZipEntry ze, File out) throws Exception {
         InputStream in = zf.getInputStream(ze);
         FileOutputStream fo = new FileOutputStream(out);
-        byte[] b = new byte[16384];
-        int n;
-        while ((n = in.read(b)) > 0) fo.write(b, 0, n);
-        in.close();
-        fo.close();
+        try {
+            byte[] b = new byte[16384];
+            int n;
+            while ((n = in.read(b)) > 0) fo.write(b, 0, n);
+        } finally {
+            try { in.close(); } catch (Exception ignored) { }
+            try { fo.close(); } catch (Exception ignored) { }
+        }
     }
 
     private static String safeName(String n) {
