@@ -71,7 +71,18 @@ public class ScanProgressActivity extends Activity {
     }
     private void doneCurrent() { if (current != null) { String t = current.getText().toString().replaceFirst("^●", "✓"); current.setText(t); current.setTextColor(getResources().getColor(R.color.ink_secondary)); current = null; } }
     private void checkCancelled() throws Exception { if (cancelled) throw new Exception("Scan cancelled"); }
-    private void copy(File src, File dst) throws Exception { FileInputStream in = new FileInputStream(src); FileOutputStream out = new FileOutputStream(dst); byte[] b = new byte[16384]; int n; while ((n = in.read(b)) > 0) out.write(b, 0, n); in.close(); out.close(); }
+    private void copy(File src, File dst) throws Exception {
+        FileInputStream in = new FileInputStream(src);
+        FileOutputStream out = new FileOutputStream(dst);
+        try {
+            byte[] b = new byte[16384];
+            int n;
+            while ((n = in.read(b)) > 0) out.write(b, 0, n);
+        } finally {
+            try { in.close(); } catch (Exception ignored) { }
+            try { out.close(); } catch (Exception ignored) { }
+        }
+    }
     private boolean deleteRecursive(File f) { if (f == null || !f.exists()) return true; if (f.isDirectory()) { File[] cs = f.listFiles(); if (cs != null) for (File c : cs) deleteRecursive(c); } return f.delete(); }
     private int dp(int v) { return (int)(v * getResources().getDisplayMetrics().density + .5f); }
 }

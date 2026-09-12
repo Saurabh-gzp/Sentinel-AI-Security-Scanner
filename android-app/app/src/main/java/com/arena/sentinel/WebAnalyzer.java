@@ -64,11 +64,9 @@ class WebAnalyzer {
 
         String withScheme = base.contains("://") ? base : "https://" + base;
         Response resp;
-        String lastErr = "";
         try {
             resp = fetch(withScheme);
         } catch (Exception e) {
-            lastErr = e.getMessage() == null ? e.toString() : e.getMessage();
             if (!base.contains("://")) {
                 resp = fetch("http://" + base);
             } else {
@@ -91,9 +89,9 @@ class WebAnalyzer {
         int forms = count(html, "<form");
         int pwFields = count(html.toLowerCase(), "type=\"password\"") + count(html.toLowerCase(), "type='password'");
         Set<String> extScripts = new LinkedHashSet<>();
-        collect(SCRIPT_SRC, head, extScripts, host);
+        collect(SCRIPT_SRC, head, extScripts);
         Set<String> iframes = new LinkedHashSet<>();
-        collect(IFRAME_SRC, head, iframes, host);
+        collect(IFRAME_SRC, head, iframes);
         int externalLinks = 0;
         Matcher mh = LINK_HREF.matcher(head);
         while (mh.find()) if (!sameHost(mh.group(1), host)) externalLinks++;
@@ -208,9 +206,6 @@ class WebAnalyzer {
         URL url = new URL(urlStr);
         for (int hop = 0; hop < 6; hop++) {
             String h = url.getHost();
-            if (!res.chain.isEmpty() && res.chain.get(res.chain.size() - 1).equalsIgnoreCase(h)) {
-                // same host again, fine
-            }
             if (res.chain.isEmpty() || !res.chain.get(res.chain.size() - 1).equalsIgnoreCase(h)) res.chain.add(h);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setInstanceFollowRedirects(false);
@@ -287,7 +282,7 @@ class WebAnalyzer {
         return c;
     }
 
-    private static void collect(Pattern p, String s, Set<String> out, String host) {
+    private static void collect(Pattern p, String s, Set<String> out) {
         Matcher m = p.matcher(s);
         while (m.find()) {
             String v = m.group(1).trim();
@@ -330,9 +325,9 @@ class WebAnalyzer {
         int forms = count(html, "<form");
         int pwFields = count(html.toLowerCase(), "type=\"password\"") + count(html.toLowerCase(), "type='password'");
         Set<String> extScripts = new LinkedHashSet<>();
-        collect(SCRIPT_SRC, head, extScripts, host);
+        collect(SCRIPT_SRC, head, extScripts);
         Set<String> iframes = new LinkedHashSet<>();
-        collect(IFRAME_SRC, head, iframes, host);
+        collect(IFRAME_SRC, head, iframes);
         int externalLinks = 0;
         Matcher mh = LINK_HREF.matcher(head);
         while (mh.find()) if (!sameHost(mh.group(1), host)) externalLinks++;

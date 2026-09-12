@@ -80,6 +80,8 @@ class ApkAnalyzer {
         int dexCount = 0, soCount = 0, total = 0;
         List<String> notable = new ArrayList<>();
         List<byte[]> dexes = new ArrayList<>();
+        long dexBytes = 0;
+        final long DEX_BYTE_CAP = 64L * 1024 * 1024; // keep total in-memory DEX bounded on low-RAM devices
         byte[] manifestBytes = null;
         try (ZipFile zf = new ZipFile(apk)) {
             Enumeration<? extends ZipEntry> e = zf.entries();
@@ -92,7 +94,10 @@ class ApkAnalyzer {
                 if (n.equals("AndroidManifest.xml")) manifestBytes = readEntry(zf, ze);
                 if (n.startsWith("classes") && n.endsWith(".dex")) {
                     dexCount++;
-                    if (dexes.size() < 8) dexes.add(readEntry(zf, ze));
+                    if (dexes.size() < 8 && dexBytes + ze.getSize() <= DEX_BYTE_CAP) {
+                        dexes.add(readEntry(zf, ze));
+                        dexBytes += ze.getSize();
+                    }
                 }
                 if (n.endsWith(".so")) {
                     soCount++;

@@ -602,18 +602,21 @@ public class MainActivity extends Activity {
     }
 
     private File copyToCache(Uri uri, String name) {
+        File f = new File(getCacheDir(), name);
+        InputStream in = null;
+        OutputStream out = null;
         try {
-            File f = new File(getCacheDir(), name);
-            InputStream in = getContentResolver().openInputStream(uri);
-            OutputStream out = new java.io.FileOutputStream(f);
+            in = getContentResolver().openInputStream(uri);
+            out = new java.io.FileOutputStream(f);
             byte[] b = new byte[16384];
             int n;
             while ((n = in.read(b)) > 0) out.write(b, 0, n);
-            in.close();
-            out.close();
             return f;
         } catch (Exception e) {
             return null;
+        } finally {
+            try { if (in != null) in.close(); } catch (Exception ignored) { }
+            try { if (out != null) out.close(); } catch (Exception ignored) { }
         }
     }
 
@@ -624,7 +627,7 @@ public class MainActivity extends Activity {
             File[] fs = c.listFiles();
             if (fs != null) for (File f : fs) {
                 String nm = f.getName();
-                if (nm.endsWith(".apk") || nm.startsWith("scan") || nm.startsWith("web") || nm.startsWith("extract")) {
+                if (nm.endsWith(".apk") || nm.startsWith("scan") || nm.startsWith("web") || nm.startsWith("extract") || nm.startsWith("pkg")) {
                     if (deleteRecursive(f)) n++;
                 }
             }
